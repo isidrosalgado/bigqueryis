@@ -44,6 +44,24 @@ view: orders {
     # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
+  measure: sum_qty {
+    group_label: "Quantity"
+    group_item_label: "Total sum of Quantity"
+    label: "Total Quantity"
+    type: sum
+    sql: ${num_of_item} ;;
+  }
+  measure: total_unit_sell_price_last_year {
+    label: "bug_sell_previous_year"
+    group_label: "PoP_bug"
+    value_format:"€#,##0;-€#,##0"
+
+    type: period_over_period
+    based_on: count
+    based_on_time: created_year
+    period: year
+    kind: previous
+  }
   measure: count {
     type: count
     drill_fields: [order_id, users.last_name, users.id, users.first_name, order_items.count]

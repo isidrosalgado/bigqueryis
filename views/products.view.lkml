@@ -40,6 +40,7 @@ view: products {
     type: string
     sql: ${TABLE}.sku ;;
   }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -48,13 +49,13 @@ view: products {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	name,
-	distribution_centers.name,
-	distribution_centers.id,
-	inventory_items.count,
-	order_items.count
-	]
+  id,
+  name,
+  distribution_centers.name,
+  distribution_centers.id,
+  inventory_items.count,
+  order_items.count
+  ]
   }
 
 }
