@@ -18,6 +18,24 @@ view: cfips_location {
     sql_latitude:${TABLE}.lng  ;;
     sql_longitude:${TABLE}.lng;;
   }
+  dimension: latitude {
+    type: number
+    sql: IFNULL(${TABLE}.lat,49.439);;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: IFNULL(${TABLE}.lng,-129.403078);;
+  }
+
+
+
+  dimension: location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
 
   dimension: name {
     type: string
