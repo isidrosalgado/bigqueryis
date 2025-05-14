@@ -16,7 +16,7 @@ view: cfips_location {
   dimension: lng_1 {
     type: location
     sql_latitude:${TABLE}.lng  ;;
-    sql_longitude:${TABLE}.lng -100;;
+    sql_longitude:${TABLE}.lng;;
   }
 
   dimension: name {
