@@ -78,6 +78,12 @@ view: users {
   measure: count {
     type: count
     drill_fields: [detail*]
+    required_access_grants: [can_view_drill]
+  }
+  measure: count_empty {
+    type: count
+    drill_fields: [detail_empty*]
+    required_access_grants: [can_view_drill]
   }
 
   # ----- Sets of fields for drilling ------
@@ -92,6 +98,10 @@ view: users {
   orders.count,
   test_electronice_sales.count
   ]
+  }
+
+  set: detail_empty {
+    fields: []
   }
 
 }
