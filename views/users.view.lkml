@@ -5,6 +5,7 @@ view: users {
   dimension: id {
     primary_key: yes
     type: number
+    tags: ["user_id"]
     sql: ${TABLE}.id ;;
   }
   dimension: age {
@@ -37,6 +38,7 @@ view: users {
   }
   dimension: email {
     type: string
+    tags: ["email"]
     sql: ${TABLE}.email ;;
   }
   dimension: first_name {
