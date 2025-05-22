@@ -10,6 +10,7 @@ view: orders {
   dimension_group: created {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year,month_name]
+
     sql: ${TABLE}.created_at ;;
   }
   dimension_group: delivered {
@@ -42,31 +43,12 @@ view: orders {
   dimension: user_id {
     type: number
     # hidden: yes
-    sql: ${TABLE}.user_id ;;
-  }
+    sql: ${TABLE}.user_id ;;}
+
   measure: count {
     type: count
     drill_fields: [order_id, users.last_name, users.id, users.first_name, order_items.count]
+
   }
-  measure: pop {
-    type: period_over_period
-    based_on: count
-    based_on_time: created_date
-    kind: previous
-    period: year
-  }
-  measure: diff {
-    type: period_over_period
-    based_on: count
-    based_on_time: created_date
-    kind: difference
-    period: year
-  }
-  measure: percent {
-    type: period_over_period
-    based_on: count
-    based_on_time: created_date
-    kind: relative_change
-    period: year
-  }
+
 }

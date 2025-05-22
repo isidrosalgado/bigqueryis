@@ -164,3 +164,13 @@ explore: test_electronice_sales {
     relationship: many_to_one
   }
 }
+
+access_grant: can_view_drill {
+  user_attribute: testdrill
+  allowed_values: [ "admin" ]
+}
+
+access_grant: cant_view_drill {
+  user_attribute: testdrill
+  allowed_values: [ "developer" ]
+}
