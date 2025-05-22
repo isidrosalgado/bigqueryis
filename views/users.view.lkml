@@ -5,6 +5,7 @@ view: users {
   dimension: id {
     primary_key: yes
     type: number
+    tags: ["user_id"]
     sql: ${TABLE}.id ;;
   }
   dimension: age {
@@ -38,6 +39,7 @@ view: users {
   }
   dimension: email {
     type: string
+    tags: ["email"]
     sql: ${TABLE}.email ;;
   }
   dimension: first_name {
@@ -79,6 +81,12 @@ view: users {
   measure: count {
     type: count
     drill_fields: [detail*]
+    required_access_grants: [can_view_drill]
+  }
+  measure: count_empty {
+    type: count
+    drill_fields: [detail_empty*]
+    required_access_grants: [can_view_drill]
   }
 
   dimension: currency_symbol {
@@ -119,6 +127,10 @@ view: users {
   orders.count,
   test_electronice_sales.count
   ]
+  }
+
+  set: detail_empty {
+    fields: []
   }
 
 }
