@@ -58,4 +58,26 @@ view: inventory_items {
     type: count
     drill_fields: [id, product_name, products.name, products.id, order_items.count]
   }
+  measure: PoP_test {
+    type: period_over_period
+    based_on: count
+    period: year
+    based_on_time: created_year
+    kind: previous
+  }
+  measure: Difference {
+    type: period_over_period
+    based_on: count
+    period: year
+    based_on_time: created_year
+    kind: difference
+  }
+  measure: percent_change {
+    type: period_over_period
+    based_on: count
+    period: year
+    based_on_time: created_year
+    kind: relative_change
+    value_format: "0.00"
+  }
 }
