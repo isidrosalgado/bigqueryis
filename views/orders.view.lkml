@@ -9,7 +9,8 @@ view: orders {
   }
   dimension_group: created {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, quarter, year,month_name]
+
     sql: ${TABLE}.created_at ;;
   }
   dimension_group: delivered {
@@ -42,10 +43,12 @@ view: orders {
   dimension: user_id {
     type: number
     # hidden: yes
-    sql: ${TABLE}.user_id ;;
-  }
+    sql: ${TABLE}.user_id ;;}
+
   measure: count {
     type: count
     drill_fields: [order_id, users.last_name, users.id, users.first_name, order_items.count]
+
   }
+
 }

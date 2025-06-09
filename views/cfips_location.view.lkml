@@ -13,6 +13,12 @@ view: cfips_location {
     type: number
     sql: ${TABLE}.lng ;;
   }
+  dimension: lng_1 {
+    type: location
+    sql_latitude:${TABLE}.lng  ;;
+    sql_longitude:${TABLE}.lng;;
+  }
+
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;

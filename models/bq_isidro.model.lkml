@@ -2,6 +2,7 @@ connection: "finance_data"
 
 # include all the views
 include: "/views/**/*.view.lkml"
+include: "/views/derived.view.lkml"
 
 datagroup: bq_isidro_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -21,34 +22,50 @@ explore: imdb_data {}
 explore: bqml_model_info {}
 
 explore: electronics_sales {
-  join: users {
-    type: left_outer 
-    sql_on: ${electronics_sales.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+# <<<<<<< HEAD
+#   # join: users {
+#   #   type: left_outer
+#   #   sql_on: ${electronics_sales.user_id} = ${users.id} ;;
+#   #   relationship: many_to_one
+#   # }
+# =======
+#   join: users {
+#     type: left_outer
+#     sql_on: ${electronics_sales.user_id} = ${users.id} ;;
+#     relationship: many_to_one
+#   }
+# >>>>>>> 723ba6a498532819a9234ea383dfc197f9b1ce85
 }
 
 explore: cfips_location {}
 
 explore: events {
-  join: users {
-    type: left_outer 
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+# <<<<<<< HEAD
+#   # join: users {
+#   #   type: left_outer
+#   #   sql_on: ${events.user_id} = ${users.id} ;;
+#   #   relationship: many_to_one
+#   # }
+# =======
+#   join: users {
+#     type: left_outer
+#     sql_on: ${events.user_id} = ${users.id} ;;
+#     relationship: many_to_one
+#   }
+# >>>>>>> 723ba6a498532819a9234ea383dfc197f9b1ce85
 }
 
 explore: irs_990_2012 {}
 
 explore: inventory_items {
   join: products {
-    type: left_outer 
+    type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
 
   join: distribution_centers {
-    type: left_outer 
+    type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
@@ -86,39 +103,45 @@ explore: irs_990_pf_2014 {}
 
 explore: order_items {
   join: users {
-    type: left_outer 
+    type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 
   join: inventory_items {
-    type: left_outer 
+    type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
   }
 
   join: products {
-    type: left_outer 
+    type: left_outer
     sql_on: ${order_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
 
   join: orders {
-    type: left_outer 
+    type: left_outer
     sql_on: ${order_items.order_id} = ${orders.order_id} ;;
     relationship: many_to_one
   }
 
   join: distribution_centers {
-    type: left_outer 
+    type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
 }
 
 explore: orders {
+  join: order_items {
+    type: left_outer
+    sql_on: ${order_items.order_id} = ${orders.order_id} ;;
+    relationship: many_to_one
+  }
+
   join: users {
-    type: left_outer 
+    type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
@@ -132,7 +155,7 @@ explore: sp_stocks {}
 
 explore: products {
   join: distribution_centers {
-    type: left_outer 
+    type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
@@ -152,15 +175,45 @@ explore: world_aqi {}
 
 explore: test_model_input_data_selected {}
 
-explore: users {}
+# <<<<<<< HEAD
+explore: users {
+  join: order_items {
+    type: left_outer
+    sql_on: ${order_items.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+}
+# =======
+# explore: users {}
 
 explore: test_model_input_data_model_training {}
 
 explore: test_electronice_sales {
-  join: users {
-    type: left_outer 
-    sql_on: ${test_electronice_sales.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+#   join: users {
+#     type: left_outer
+#     sql_on: ${test_electronice_sales.user_id} = ${users.id} ;;
+# >>>>>>> 723ba6a498532819a9234ea383dfc197f9b1ce85
+#     relationship: many_to_one
+  # }
 }
 
+# <<<<<<< HEAD
+# explore: test_model_input_data_model_training {}
+
+# explore: test_electronice_sales {
+#   # join: users {
+#   #   type: left_outer
+#   #   sql_on: ${test_electronice_sales.user_id} = ${users.id} ;;
+#   #   relationship: many_to_one
+#   # }
+# =======
+access_grant: can_view_drill {
+  user_attribute: testdrill
+  allowed_values: [ "admin" ]
+}
+
+# access_grant: cant_view_drill {
+#   user_attribute: testdrill
+#   allowed_values: [ "developer" ]
+# >>>>>>> 723ba6a498532819a9234ea383dfc197f9b1ce85
+# }
