@@ -9,7 +9,7 @@ view: order_items {
   }
   dimension_group: created {
     type: time
-    datatype: datetime
+    #datatype: datetime
     timeframes: [raw, time, date, week, month, quarter, year,day_of_week]
     sql: ${TABLE}.created_at ;;
   }
