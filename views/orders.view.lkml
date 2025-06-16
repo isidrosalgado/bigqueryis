@@ -42,10 +42,12 @@ view: orders {
   dimension: user_id {
     type: number
     # hidden: yes
-    sql: ${TABLE}.user_id ;;
-  }
+    sql: ${TABLE}.user_id ;;}
+
   measure: count {
     type: count
     drill_fields: [order_id, users.last_name, users.id, users.first_name, order_items.count]
+
   }
+
 }

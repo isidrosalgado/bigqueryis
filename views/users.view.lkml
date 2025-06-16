@@ -5,6 +5,7 @@ view: users {
   dimension: id {
     primary_key: yes
     type: number
+    tags: ["user_id"]
     sql: ${TABLE}.id ;;
   }
   dimension: age {
@@ -29,6 +30,7 @@ view: users {
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
+    # html: {{first_name._rendered_value}}my_custom_tool_tip ;;
   }
   dimension_group: created {
     type: time
@@ -37,6 +39,7 @@ view: users {
   }
   dimension: email {
     type: string
+    tags: ["email"]
     sql: ${TABLE}.email ;;
   }
   dimension: first_name {
@@ -84,6 +87,32 @@ view: users {
     type: count
     drill_fields: [detail_empty*]
     required_access_grants: [can_view_drill]
+  }
+
+  dimension: currency_symbol {
+    type: string
+    sql:
+    CASE
+    WHEN ${order_items.status} = 'Shipped' THEN '€'
+    WHEN ${order_items.status} = 'Complete' THEN '£'
+    WHEN ${order_items.status} = 'Returned' THEN '$'
+    WHEN ${order_items.status} = 'Shipped' THEN '$'
+    ELSE '$'
+    END ;;
+    hidden: no
+  }
+
+  measure: gross_income_measure {
+    label: "Gross Income"
+    type: sum_distinct
+    sql: ${id} - ${age} ;;
+    value_format_name: decimal_2
+    html:
+    {% if value < 0 %}
+    -{{ currency_symbol._value }}{{ rendered_value | remove_first: "-" }}
+    {% else %}
+    {{ currency_symbol._value }}{{ rendered_value }}
+    {% endif %} ;;
   }
 
   # ----- Sets of fields for drilling ------
