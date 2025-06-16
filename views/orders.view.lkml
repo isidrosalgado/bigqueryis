@@ -9,8 +9,8 @@ view: orders {
   }
   dimension_group: created {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    sql: ${TABLE}.created_at ;;
+    sql: CAST(${TABLE}.created_at AS DATETIME) ;;
+    datatype: datetime
   }
   dimension_group: delivered {
     type: time
