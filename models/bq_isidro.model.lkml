@@ -3,6 +3,8 @@ connection: "finance_data"
 # include all the views
 include: "/views/employee.view.lkml"
 include: "/views/order_items.view.lkml"
+include: "/views/orders.view.lkml"
+
 explore: employee {}
 
 explore: order_items {
@@ -24,11 +26,11 @@ explore: order_items {
   #   relationship: many_to_one
   # }
 
-  # join: orders {
-  #   type: left_outer
-  #   sql_on: ${order_items.order_id} = ${orders.order_id} ;;
-  #   relationship: many_to_one
-  # }
+  join: orders {
+    type: left_outer
+    sql_on: ${order_items.order_id} = ${orders.order_id} ;;
+    relationship: many_to_one
+  }
 
   # join: distribution_centers {
   #   type: left_outer
